@@ -137,6 +137,7 @@ deNovo.click()
 #set number of generations
 numOfGen = driver.find_element_by_name("GENMAX")
 
+print("")
 gen = input("Number of generations (max = 50): ")
 
 numOfGen.clear()
