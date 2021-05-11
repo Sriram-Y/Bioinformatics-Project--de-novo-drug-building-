@@ -1,9 +1,10 @@
-#*****THIS VERSION HARDCODES INFORMATION INTO THE WEBISTE*****#
-#*****PDB Example 1. 6x3x_apo.pdb*****#
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+
+def chromeDriver(PATH, chrome_options):
+    driver = webdriver.Chrome(driverPATH, options=chrome_options)
+    return driver
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
@@ -12,13 +13,7 @@ chrome_options.add_argument('headless')
 
 print("Download Chrome Driver from: https://chromedriver.chromium.org/downloads")
 driverPATH = input("Provide path to chrome driver: ")
-
 #driverPATH = "/home/sriram/Documents/chromedriver"
-
-
-def chromeDriver(PATH, chrome_options):
-    driver = webdriver.Chrome(driverPATH, options=chrome_options)
-    return driver
 
 driver = chromeDriver(driverPATH, chrome_options)
 websitePATH = "https://chemoinfo.ipmc.cnrs.fr/LEA3D/index.html"
@@ -29,16 +24,18 @@ cfProtein_button = driver.find_element_by_name("protein")
 #upload file path w/ path
 pdbPATH = input("Provide path to pdb file: ")
 cfProtein_button.send_keys(pdbPATH)
-#cfProtein_button.send_keys("/home/sriram/Downloads/6x3x_apo.pdb")
+#cfProtein_button.send_keys("/home/sriram/Documents/6x3x_apo.pdb")
 
 #set coordinates of the center of the binding site (x,y,z)
 cordx = driver.find_element_by_name("x")
 cordy = driver.find_element_by_name("y")
 cordz = driver.find_element_by_name("z")
 
-x = input("Enter x coordinate:")
-y = input("Enter y coordinate:")
-z = input("Enter z coordinate:")
+print("")
+x = input("Enter x coordinate: ")
+y = input("Enter y coordinate: ")
+z = input("Enter z coordinate: ")
+print("")
 
 cordx.clear()
 cordx.send_keys(x)
@@ -55,7 +52,7 @@ cordz.send_keys(z)
 #set Binding site radius
 bindingSiteRadius = driver.find_element_by_name("radius")
 
-bindSiteRadius = input("Enter binding site radius:")
+bindSiteRadius = input("Enter binding site radius: ")
 
 bindingSiteRadius.clear()
 bindingSiteRadius.send_keys(bindSiteRadius)
@@ -64,7 +61,9 @@ bindingSiteRadius.send_keys(bindSiteRadius)
 #set Weight in final score
 weightInFinalScore = driver.find_element_by_name("dockw")
 
-weight = input("Enter weight in final score:")
+weight = input("Enter weight in final score: ")
+
+print("\nWaiting for response...\n")
 
 weightInFinalScore.clear()
 weightInFinalScore.send_keys(weight)
@@ -122,13 +121,12 @@ submitButton.click()
 
 #next page after submitButton is clicked
 
-#set emailbody > table:nth-child(2) > tbody > tr:nth-child(3) > td:nth-child(2) > table > tbody > tr:nth-child(4) > td > center > input[type=submit]
+#enter email
 emailField = driver.find_element_by_name("email")
 
 email = input("Email: ")
 
 emailField.send_keys(email)
-
 #emailField.send_keys("sriramy2001@gmail.com")
 
 #select de novo drug design
@@ -163,4 +161,3 @@ start.click()
 submitButton2 = driver.find_element_by_css_selector("body > table:nth-child(2) > tbody > tr:nth-child(2) > td:nth-child(2) > table > tbody > tr:nth-child(8) > td > center > input[type=submit]")
 
 submitButton2.click()
-

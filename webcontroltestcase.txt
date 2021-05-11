@@ -1,0 +1,8 @@
+/home/sriram/Documents/chromedriver
+/home/sriram/Documents/6x3x_apo.pdb
+145.6
+122.5
+120.9
+16.0
+1
+sriramy2001@gmail.com
